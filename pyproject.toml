@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "moritzstrategie"
+version = "0.1.0"
+description = "H4 Camarilla Reversal trading strategy for Bitget USDT-Perpetual futures."
+requires-python = ">=3.9"
+authors = [{ name = "Moritz Litterscheidt" }]
+license = { text = "Proprietary" }
+dependencies = []  # Decimal-only, no numerical libs needed for the core library
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=4.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

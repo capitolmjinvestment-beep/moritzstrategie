@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.installed.cfg
+*.egg
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+env/
+.env
+
+# Editors / IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Data files (raw bars, exports) — never commit market data into the repo
+data/
+*.parquet
+*.csv
+!docs/**/*.csv  # exception: documentation example CSVs
+
+# Secrets
+.env.local
+*.key
+*.pem
+config/secrets.*
+
+# Logs
+*.log
+logs/
+
+# Notebooks (if any get added later)
+.ipynb_checkpoints/
