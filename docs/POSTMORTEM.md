@@ -92,6 +92,30 @@ At 34% win-rate × 1:2 R:R, expected value per trade is
 `0.34 × 2 - 0.66 × 1 = +0.02R` gross, which is consumed entirely by friction
 (~0.05R per round-trip). The strategy is structurally unprofitable.
 
+### Test 5: Refined "All Indicators" Strategy (Phase 3 follow-up)
+
+Per user request after the original postmortem, Fibonacci was added as a
+fifth indicator and a refined strategy combined ALL 5 indicators
+(RSI + ATR + Camarilla + Patterns + Fibonacci) with Fibonacci-extension
+targets (TP1=1.272, TP2=1.618) replacing the previous H4 / ATR-multiple
+targets. Hold-out test repeated on all three symbols:
+
+| Symbol | IS Net Return | OOS Net Return | OOS Win-Rate |
+|--------|---------------|----------------|--------------|
+| BTC | +13.05% | -3.41%  | 35.3% |
+| ETH | +24.18% | -2.59%  | 38.5% |
+| SOL |  +5.37% | -14.10% | **25.0%** (worse than Phase 2: 34.0%) |
+
+**Finding:** Adding Fibonacci did NOT change the verdict. All 3 symbols show
+the same pattern as before: positive in-sample, negative out-of-sample.
+SOL actually got worse (Fibonacci extensions are further from entry than
+the flat ATR-targets, so more trades hit the stop before TP1).
+
+The takeaway: the problem is NOT in the exit targets. It is in the entry
+signal quality — we are catching breakouts/reversals that don't follow
+through, and no amount of target refinement can fix that. This strengthens
+the original postmortem conclusion.
+
 ---
 
 ## Why the strategy doesn't work
