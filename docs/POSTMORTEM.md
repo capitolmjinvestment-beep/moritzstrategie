@@ -116,6 +116,30 @@ signal quality — we are catching breakouts/reversals that don't follow
 through, and no amount of target refinement can fix that. This strengthens
 the original postmortem conclusion.
 
+### Test 6: Time-Stop Sensitivity (Phase 3 follow-up)
+
+Per user request, time-stop varied between 12 / 24 / 48 / disabled (9999) bars
+to test whether shorter time-stops were cutting trades short before TP1 hit.
+
+| Symbol | TS 12 | TS 24 | TS 48 | TS disabled |
+|--------|-------|-------|-------|-------------|
+| BTC OOS | -3.41% | -3.41% | **+1.78%** | **+1.78%** |
+| ETH OOS | -2.59% | -6.76% | -6.30% | -4.28% |
+| SOL OOS | -14.10% | -15.22% | -15.98% | -17.21% |
+
+**Finding:** Time-stop is NOT universal across symbols. BTC benefits from longer
+time-stops (flips from -3.41% to +1.78% OOS). ETH and SOL get worse.
+
+The BTC IS-OOS gap narrows with longer time-stop (from 16pp to 6pp), suggesting
+less overfitting — but the absolute OOS return (+1.78% / 6mo ≈ +3.6%/year) is
+below realistic friction noise and the trade count (33 OOS trades) is too low
+for statistical confidence.
+
+This is the only positive OOS result across all of Phases 2-3 (75+ backtests).
+It is documented but not actionable: a Phase-5/6 deployment would require
+significantly stronger evidence (Sharpe > 1.0 over 100+ trades, multiple
+out-of-sample periods, multiple regimes).
+
 ---
 
 ## Why the strategy doesn't work
